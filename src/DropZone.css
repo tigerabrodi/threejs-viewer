@@ -1,0 +1,146 @@
+/* Drop Zone Enhanced Styles */
+
+.drop-zone-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px;
+}
+
+.drop-zone {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px dashed var(--border-color);
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+  min-height: 40px;
+}
+
+.drop-zone:hover:not(.drop-zone-loading) {
+  border-color: var(--accent-blue);
+  background-color: rgba(74, 158, 255, 0.05);
+}
+
+.drop-zone-active {
+  border-color: var(--accent-blue);
+  background-color: rgba(74, 158, 255, 0.08);
+  border-style: solid;
+}
+
+.drop-zone-loading {
+  cursor: wait;
+  border-color: var(--accent-blue);
+  background-color: rgba(74, 158, 255, 0.03);
+}
+
+.drop-zone-error {
+  border-color: var(--accent-red);
+}
+
+.drop-zone-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.drop-icon {
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.drop-text {
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.drop-hint {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.drop-zone-loaded {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-name {
+  font-size: 13px;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.change-hint {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.clear-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-left: auto;
+  transition: color var(--transition-fast);
+  font-family: inherit;
+}
+
+.clear-button:hover {
+  color: var(--accent-red);
+}
+
+.drop-zone-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status-text {
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.drop-zone-error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: rgba(248, 113, 113, 0.1);
+  border: 1px solid var(--accent-red);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--accent-red);
+}
+
+.error-icon {
+  font-size: 14px;
+}
+
+.error-text {
+  flex: 1;
+}

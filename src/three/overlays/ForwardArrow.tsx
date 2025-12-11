@@ -6,42 +6,59 @@ interface ForwardArrowProps {
 }
 
 export function ForwardArrow({ length = 2.5, color = '#00CED1' }: ForwardArrowProps) {
-  const shaftEnd = -length + 0.4
+  const coneHeight = length * 0.15
+  const coneRadius = length * 0.05
+  const shaftEnd = -length + coneHeight
+  const fontSize = length * 0.1
+  const startMarkerSize = length * 0.03
+  const yOffset = 0.01 // Small offset to prevent z-fighting with grid
 
   return (
     <group>
-      {/* Arrow shaft pointing along -Z */}
+      {/* Arrow shaft pointing along -Z (forward direction) */}
       <Line
-        points={[[0, 0.01, 0], [0, 0.01, shaftEnd]]}
+        points={[[0, yOffset, 0], [0, yOffset, shaftEnd]]}
         color={color}
         lineWidth={3}
       />
 
-      {/* Arrow head */}
+      {/* Arrow head pointing toward -Z */}
       <Cone
-        args={[0.12, 0.4, 8]}
-        position={[0, 0.01, -length]}
+        args={[coneRadius, coneHeight, 8]}
+        position={[0, yOffset, -length]}
         rotation={[Math.PI / 2, 0, 0]}
       >
         <meshBasicMaterial color={color} />
       </Cone>
 
-      {/* Label */}
+      {/* Label with better positioning */}
       <Text
-        position={[0.4, 0.01, -length]}
-        fontSize={0.25}
+        position={[length * 0.2, yOffset, -length * 0.5]}
+        fontSize={fontSize}
         color={color}
         anchorX="left"
         anchorY="middle"
+        outlineWidth={fontSize * 0.05}
+        outlineColor="#000000"
       >
-        -Z (Forward)
+        FORWARD (-Z)
       </Text>
 
-      {/* Start marker */}
-      <mesh position={[0, 0.01, 0]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
+      {/* Start marker at origin */}
+      <mesh position={[0, yOffset, 0]}>
+        <sphereGeometry args={[startMarkerSize, 16, 16]} />
         <meshBasicMaterial color={color} />
       </mesh>
+
+      {/* Direction indicator line at arrow tip for extra clarity */}
+      <Line
+        points={[
+          [-coneRadius * 1.5, yOffset, -length],
+          [coneRadius * 1.5, yOffset, -length]
+        ]}
+        color={color}
+        lineWidth={2}
+      />
     </group>
   )
 }

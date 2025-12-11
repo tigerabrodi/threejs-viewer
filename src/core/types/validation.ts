@@ -7,6 +7,7 @@ export interface ValidationCheckResult {
   measuredValue?: unknown
   expectedValue?: unknown
   correctiveTransform?: CorrectionTransform
+  deviationAngleDegrees?: number // How far off the measured value is from expected
 }
 
 export type CorrectionTransform =

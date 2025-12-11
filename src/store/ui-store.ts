@@ -7,6 +7,9 @@ interface UIStore {
   showBoundingBox: boolean
   showLocalAxes: boolean
   showPivot: boolean
+  showDirectionLabels: boolean
+  showGroundPlane: boolean
+  showCompass: boolean
   toggleOverlay: (key: keyof Omit<UIStore, 'toggleOverlay'>) => void
 }
 
@@ -17,6 +20,9 @@ export const useUIStore = create<UIStore>((set) => ({
   showBoundingBox: true,
   showLocalAxes: false,
   showPivot: true,
+  showDirectionLabels: true,
+  showGroundPlane: false,
+  showCompass: true,
 
   toggleOverlay: (key) => {
     set((state) => ({ [key]: !state[key] }))

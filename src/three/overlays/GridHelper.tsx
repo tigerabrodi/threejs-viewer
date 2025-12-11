@@ -5,16 +5,21 @@ interface GridHelperProps {
 }
 
 export function GridHelper({ size = 20 }: GridHelperProps) {
+  // Calculate grid parameters based on size
+  const cellSize = Math.max(0.1, size / 20)
+  const sectionSize = cellSize * 5
+  const fadeDistance = size * 2
+
   return (
     <Grid
       args={[size, size]}
-      cellSize={1}
+      cellSize={cellSize}
       cellThickness={0.5}
       cellColor="#4a4a4a"
-      sectionSize={5}
-      sectionThickness={1}
+      sectionSize={sectionSize}
+      sectionThickness={1.2}
       sectionColor="#6a6a6a"
-      fadeDistance={30}
+      fadeDistance={fadeDistance}
       fadeStrength={1}
       followCamera={false}
       infiniteGrid={false}
