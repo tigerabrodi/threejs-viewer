@@ -1,0 +1,7 @@
+export { ModelValidator } from './validator'
+export { extractBasisVectors, vectorsApproximatelyEqual, matrix3x3Determinant, angleBetweenVectors } from './math-utils'
+export { checkForwardDirection } from './checks/forward-direction'
+export { checkUpDirection } from './checks/up-direction'
+export { checkHandedness } from './checks/handedness'
+export { checkPivotPosition } from './checks/pivot-position'
+export { checkScale } from './checks/scale'
