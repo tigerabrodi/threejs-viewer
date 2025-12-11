@@ -8,6 +8,7 @@ export interface ValidationCheckResult {
   expectedValue?: unknown
   correctiveTransform?: CorrectionTransform
   deviationAngleDegrees?: number // How far off the measured value is from expected
+  metadata?: Record<string, unknown> // Additional metadata like detection method, confidence, issues, etc.
 }
 
 export type CorrectionTransform =

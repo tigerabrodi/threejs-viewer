@@ -147,7 +147,7 @@ export function analyzeModel(scene: THREE.Group): ModelInfo {
   // Process textures
   const textures: TextureInfo[] = []
   texturesMap.forEach((tex, name) => {
-    const image = tex.image
+    const image = tex.image as HTMLImageElement | HTMLCanvasElement | undefined
     textures.push({
       name: name || tex.name || 'Unnamed',
       width: image?.width || 0,
@@ -202,7 +202,7 @@ export function analyzeModel(scene: THREE.Group): ModelInfo {
 
 function collectTexture(
   tex: THREE.Texture | null,
-  type: string,
+  _type: string,
   map: Map<string, THREE.Texture>
 ) {
   if (tex && !map.has(tex.uuid)) {
