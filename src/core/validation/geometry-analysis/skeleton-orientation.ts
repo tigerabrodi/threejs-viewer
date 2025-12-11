@@ -7,7 +7,8 @@ import type { StandardBones, OrientationResult } from './types'
  * Strategy:
  * 1. UP: Vector from hips to head (spine direction)
  * 2. RIGHT: Vector from left shoulder to right shoulder
- * 3. FORWARD: Cross product of up x right (perpendicular to both)
+ * 3. FORWARD: Cross product of up × right
+ *    (In a right-handed system with up=+Y and right=+X, this naturally produces -Z forward)
  */
 export function calculateSkeletonOrientation(
   bones: StandardBones
@@ -65,8 +66,9 @@ function calculateFromFullSkeleton(bones: StandardBones): OrientationResult {
     .subVectors(rightShoulderPos, leftShoulderPos)
     .normalize()
 
-  // Calculate FORWARD: cross product (up x right gives forward in right-handed system)
-  // We negate to get -Z forward convention
+  // Calculate FORWARD: up × right
+  // In a right-handed coordinate system with up=+Y and right=+X,
+  // the cross product up × right naturally produces -Z (forward direction)
   const forwardVector = new THREE.Vector3()
     .crossVectors(upVector, rightVector)
     .normalize()
@@ -111,7 +113,8 @@ function calculateFromSpineOnly(bones: StandardBones): OrientationResult {
     .sub(upVector.clone().multiplyScalar(hipsForward.dot(upVector)))
     .normalize()
 
-  // Calculate right
+  // Calculate RIGHT: up × forward
+  // This completes the orthonormal basis in the right-handed system
   const rightVector = new THREE.Vector3()
     .crossVectors(upVector, forwardVector)
     .normalize()
@@ -152,6 +155,8 @@ function calculateFromPartialSpine(bones: StandardBones): OrientationResult {
     .sub(upVector.clone().multiplyScalar(hipsForward.dot(upVector)))
     .normalize()
 
+  // Calculate RIGHT: up × forward
+  // This completes the orthonormal basis in the right-handed system
   const rightVector = new THREE.Vector3()
     .crossVectors(upVector, forwardVector)
     .normalize()
